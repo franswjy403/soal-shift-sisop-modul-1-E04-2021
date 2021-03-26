@@ -9,4 +9,14 @@ for ((i=1; i<=23; i=i+1))
     fi
 done
 rdfind -deleteduplicates true /home/frans0416/Documents/sisopE/soal3
-
+i=1
+for f in *.jpeg
+    do
+    if [ $i -lt 10 ]
+        then 
+            mv -- "$f" "Koleksi_0$i.jpeg"
+    else 
+        mv -- "$f" "Koleksi_$i.jpeg"
+    fi
+let i=$i+1
+done
