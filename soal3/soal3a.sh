@@ -1,5 +1,5 @@
 #!/bin/bash
-loc=$(pwd)
+loc=/home/frans0416/Documents/sisopE/soal3
 > "$loc"/Foto.log
 for ((i=1; i<=23; i=i+1))
     do
