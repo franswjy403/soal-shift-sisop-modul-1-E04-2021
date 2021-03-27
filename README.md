@@ -13,11 +13,11 @@
 ##Soal 1
 Pada soal ini Ryujin diminta membuat **laporan daftar peringkat pesan error terbanyak** dan **laporan penggunaan user** pada aplikasi _ticky_
 
-###1a
-####Soal:
+### 1a
+#### Soal:
 (a) Mengumpulkan informasi dari log aplikasi yang terdapat pada file syslog.log. Informasi yang diperlukan antara lain: jenis log (ERROR/INFO), pesan log, dan username pada setiap baris lognya. Karena Ryujin merasa kesulitan jika harus memeriksa satu per satu baris secara manual, dia menggunakan regex untuk mempermudah pekerjaannya. Bantulah Ryujin membuat regex tersebut.
 
-####Jawab:
+#### Jawab:
 ```
 allLogInfo=`grep -o "ticky.*" syslog.log | cut -f 2-`
 ```
@@ -35,11 +35,11 @@ ticky: ERROR Tried to add information to closed ticket (mcintosh)
 </pre>
 Hasil ini dimasukkan ke variabel bernama `$allLogInfo`
 
-###1b
-####Soal:
+### 1b
+#### Soal:
 (b) Kemudian, Ryujin harus menampilkan semua pesan error yang muncul beserta jumlah kemunculannya.
 
-####Jawab:
+#### Jawab:
 ```
 errorList=`echo "$allLogInfo" | grep -o "ERROR.*" | cut -d " " -f 2- | cut -d "(" -f 1 | sort -V | uniq -c | sort -nr`
 ```
@@ -54,11 +54,11 @@ Hasilnya kurang lebih seperti berikut.
 7 Ticket doesn&apos;t exist 
 </pre>
 
-###1c
-####Soal:
+### 1c
+#### Soal:
 (c) Ryujin juga harus dapat menampilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya.
 
-####Jawab:
+#### Jawab:
 ```
 userList=`echo "$allLogInfo" | cut -d "(" -f2 | cut -d ")" -f 1 | sort | uniq`
 ```
@@ -74,12 +74,12 @@ enim.non
 ...,
 </pre>
 
-###1d
-####Soal:
+### 1d
+#### Soal:
 (d) Semua informasi yang didapatkan pada poin b dituliskan ke dalam file error_message.csv dengan header Error,Count yang kemudian diikuti oleh 
 daftar pesan error dan jumlah kemunculannya diurutkan berdasarkan jumlah kemunculan pesan error dari yang terbanyak.
 
-####Jawab:
+#### Jawab:
 ```
 echo "Error,Count" > error_message.csv
 echo "$errorList" | while read cekerror
@@ -91,11 +91,11 @@ done >> error_message.csv
 ```
 Pertama header dikirim ke file error_message.csv dengan redirection `>`. Kemudian, tiap baris  di `$errorList` dijadikan input while loop dengan dimasukkan ke variabel `$cekerror`. Lalu, deskripsi error dan jumlah error dipisah dengan cut dan dimasukkan ke variabel `namaerror` dan `jumlah error`. Setelah itu, dua isi variabel tersebut ditambahkan ke file csv dengan redirection `>>`
 
-###1e
-####Soal:
+### 1e
+#### Soal:
 (e) Semua informasi yang didapatkan pada poin c dituliskan ke dalam file user_statistic.csv dengan header Username,INFO,ERROR diurutkan berdasarkan username secara ascending.
 
-####Jawab:
+#### Jawab:
 ```
 echo "Username,Info,Error" > user_statistic.csv
 echo "$userList" | 
