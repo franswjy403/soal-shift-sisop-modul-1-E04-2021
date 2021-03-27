@@ -357,9 +357,11 @@ for f in *; do
         if [[ "$f" == "$SUB"_* ]] 
         then
             zip -r -P "$password" Koleksi.zip "$f"
+            rm -rf "$f"
         elif [[ "$f" == "$SUB2"_* ]] 
         then   
             zip -r -P "$password" Koleksi.zip "$f"
+            rm -rf "$f"
         fi
     fi
 done
@@ -367,6 +369,10 @@ done
 Untuk membuat zip tersebut dalam keadaan terpassword, digunakan syntax :
 ```sh
 zip -r -P "$password" Koleksi.zip "$f"
+```
+Lalu, agar folder yang telah di zip tadi terhapus (karena ketika melakukan zip, folder lama masih ada), maka memakai:
+```sh
+rm -rf "$f"
 ```
 ## Jawaban Soal 3e
 Soal 3e meminta agar semua folder koleksi foto di zip ketika jam kuliah. Adapun jam kuliahnya adalah setiap hari senin-jumat dari jam 07:00 sampai 18:00. Oleh karena itu, perintah cron yang pertama adalah:
