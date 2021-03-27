@@ -204,7 +204,7 @@ Hasilnya adalah sebagai berikut:
 ```
 Tipe segmen customer yang penjualannya paling sedikit adalah Home Office dengan 1783 transaksi
 ```
-## Jawaban soal 2d
+## Jawaban Soal 2d
 Untuk sub soal terakhir, pertama kami deklarasikan field separator.
 ```sh
 awk 'BEGIN { FS="\t" }
@@ -253,4 +253,44 @@ Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedi
 ```
 ## Soal 3
 Secara keseluruhan soal ini meminta script-script yang bisa mendownload gambar, kemudian diberi nama, lalu dijadikan satu folder, dan terakhir di-*zip* berpassword.
+## Jawaban Soal 3a
+Pertama, kami deklarasikan variabel loc untuk menyimpan path file agar lebih mudah penggunaannya ke depan. Kemudian kami buat sebuah file Foto.log untuk menyimpan log download.
+```sh
+#!/bin/bash
+loc=/home/frans0416/Documents/sisopE/soal3
+> "$loc"/Foto.log
+```
+Untuk mendownload 23 gambar, kami gunakan looping sederhana sebanyak 23 kali.
+```sh
+for ((i=1; i<=23; i=i+1))
+    do
+    if [ $i -lt 10 ]
+        then wget -a "$loc"/Foto.log "https://loremflickr.com/320/240/kitten" -O "$loc"/Koleksi_0"$i".jpeg
+    else wget -a "$loc"/Foto.log "https://loremflickr.com/320/240/kitten" -O "$loc"/Koleksi_"$i".jpeg
+    fi
+done
+```
+Sntax `if [ $i -lt 10 ]` untuk membedakan penamaan yang membutuhkan angka 0 di depannya (ex: 01, 02, etc). Lalu, syntax `wget -a path link` berfungsi untuk meng-*append* log file ke Foto.log. Sedangkan untuk `-O` secara kasar digunakan untuk memberi nama dan format untuk file yang terdownload.
 
+Selanjutny, untuk menghapus file yang double, kami gunakan `rdfind`
+```sh
+rdfind -deleteduplicates true "$loc"
+```
+`rdfind` dapat digunakan untuk menghapus file duplikat pada suatu direktori.
+
+Terakhir, dilakukan looping untuk setiap file .jpeg yang ada di direktori tersebut, diberi penamaan baru secara terurut (untuk mengatasi nama-nama file yang hilang akibat delete). Looping dilakukan dengan asumsi command bash ini dijalankan dari root dan file di dalam direktorinya hanya ada file foto-foto kucing.
+```sh
+i=1
+cd "$loc"
+for f in *.jpeg
+    do
+    if [ $i -lt 10 ]
+        then 
+            mv -- "$f" "Koleksi_0$i.jpeg"
+    else 
+        mv -- "$f" "Koleksi_$i.jpeg"
+    fi
+let i=$i+1
+done
+
+```
