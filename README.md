@@ -306,4 +306,61 @@ Pada soal, diminta menjalankan script soal3b.sh, setiap pukul 20:00 (`00 20`) se
 00 20 1/7,2/4 * * bash /home/frans0416/Documents/sisopE/soal3/soal3b.sh
 ```
 ## Jawaban Soal 3c
-Pada soal 3c, diminta pendownload an gambar berbeda tiap harinya. Oleh karena itu ditambahkan beberapa kondisional pada soal 3b. Kami memanfaatkan tanggal untuk pengondisiannya. Apabila tanggal hari tersebut merupakan tanggal genap
+Pada soal 3c, diminta pendownload an gambar berbeda tiap harinya. Oleh karena itu ditambahkan beberapa kondisional pada soal 3b. Kami memanfaatkan tanggal untuk pengondisiannya. Apabila tanggal hari tersebut merupakan tanggal genap, maka download foto-foto kucing. Sebaliknya, download foto-foto kelinci. Pengondisian tersebut juga bekerja untuk mengatur pemberian nama folder.
+```sh
+curr=$(date "+%d")
+let curr=$curr%2
+if [ $curr -eq 0 ]
+then
+        loc="Kucing_"$(date +%d-%m-%Y)
+else 
+        loc="Kelinci_"$(date +%d-%m-%Y)
+fi
+
+mkdir "$root"/"$loc"
+
+for ((i=1; i<=23; i=i+1))
+    do
+    if [ $curr -eq 0 ]
+    then
+            if [ $i -lt 10 ]
+                    then wget -a "$root"/"$loc"/Foto.log "https://loremflickr.com/320/240/kitten" -O "$root"/"$loc"/Koleksi_0"$i".jpeg
+            else wget -a "$root"/"$loc"/Foto.log "https://loremflickr.com/320/240/kitten" -O "$root"/"$loc"/Koleksi_"$i".jpeg
+            fi
+
+    elif [ $curr -eq 1 ]
+    then
+            if [ $i -lt 10 ]
+                    then wget -a "$root"/"$loc"/Foto.log "https://loremflickr.com/320/240/bunny" -O "$root"/"$loc"/Koleksi_0"$i".jpeg
+            else wget -a "$root"/"$loc"/Foto.log "https://loremflickr.com/320/240/bunny" -O "$root"/"$loc"/Koleksi_"$i".jpeg      
+            fi
+    fi
+done
+```
+Selebihnya, untuk penghapusan file duplikat, penamaan file, dan penyimpanan file hampir sama seperti soal 3b, hanya berbeda path.
+## Jawaban Soal 3d
+Soal 3d meminta agar semua folder, baik folder kucing maupun kelinci, di zip ke dalam sebuah file bernama Koleksi.zip dan diberi password berupa tanggal dengan format MMDDYYYY.
+
+Pertama, kami deklarasikan dulu beberapa variabel yang berguna untuk pencarian folder yang akan di zip dan penyiapan password.
+```sh
+#!/bin/bash
+SUB="Kelinci"
+SUB2="Kucing"
+password=$(date +%m%d%Y)
+```
+Syntax di atas bertujuan agar nantinya, folder yang di zip hanyalah folder kelinci dan kucing.
+
+Langkah selanjutnya adalah mentraverse semua file yang ada di direktori yang sama (`for f in *;`). Jika file merupakan folder (`if [ -d "$f" ]`), maka akan dicek, apakah substring dari nama folder tersebut merupakan salah satu di antara kucing atau kelinci. 
+```sh
+for f in *; do
+    if [ -d "$f" ]; then
+        if [[ "$f" == *"$SUB"* ]] 
+        then
+            zip -r -P "$password" Koleksi.zip "$f"
+        elif [[ "$f" == *"$SUB2"* ]] 
+        then   
+            zip -r -P "$password" Koleksi.zip "$f"
+        fi
+    fi
+done
+```
