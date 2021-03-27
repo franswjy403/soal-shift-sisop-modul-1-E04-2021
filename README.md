@@ -287,5 +287,23 @@ for f in Koleksi_*.jpeg
     fi
 let i=$i+1
 done
-
 ```
+Syntax `for f in Koleksi_*.jpeg` berguna untuk mencari file-file dengan nama Koleksi_ dan bertipe jpeg. Syntax `mv -- old_file new_fie` kami gunakan untuk memindah file yang ada ke tempat yang sama, tetapi dengan format nama berbeda.
+## Jawaban Soal 3b
+### soal3b.sh
+Untuk soal 3b, tidak jauh berbeda dengan soal 3a. Hanya saja, file-file yang telah di download ini harus disimpan ke dalam sebuah folder dengan format nama DD-MM-YY. Berikut syntax pembuatan foldernya:
+```sh
+loc=$(date +%d-%m-%Y)
+mkdir "$root"/"$loc"
+```
+Dengan adanya folder baru ini, hanya akan mempengaruhi lokasi penyimpanannya saja. Seperti contohnya:
+```sh
+wget -a "$root"/"$loc"/Foto.log "https://loremflickr.com/320/240/kitten" -O "$root"/"$loc"/Koleksi_0"$i".jpeg
+```
+### cron3b.tab
+Pada soal, diminta menjalankan script soal3b.sh, setiap pukul 20:00 (`00 20`) setiap tujuh hari dimulai dari tanggal 1 (`1/7`) dan setiap 4 hari dimulai dari tanggal 2 (`2/4`).
+```tab
+00 20 1/7,2/4 * * bash /home/frans0416/Documents/sisopE/soal3/soal3b.sh
+```
+## Jawaban Soal 3c
+Pada soal 3c, diminta pendownload an gambar berbeda tiap harinya. Oleh karena itu ditambahkan beberapa kondisional pada soal 3b. Kami memanfaatkan tanggal untuk pengondisiannya. Apabila tanggal hari tersebut merupakan tanggal genap
