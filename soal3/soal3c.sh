@@ -33,7 +33,7 @@ done
 rdfind -deleteduplicates true "$root"/"$loc"
 cd "$root"/"$loc"
 i=1
-for f in *.jpeg
+for f in Koleksi_*.jpeg
     do
     if [ $i -lt 10 ]
         then 
