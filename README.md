@@ -273,11 +273,11 @@ rdfind -deleteduplicates true "$loc"
 ```
 `rdfind` dapat digunakan untuk menghapus file duplikat pada suatu direktori.
 
-Terakhir, dilakukan looping untuk setiap file .jpeg yang ada di direktori tersebut, diberi penamaan baru secara terurut (untuk mengatasi nama-nama file yang hilang akibat delete). Looping dilakukan dengan asumsi command bash ini dijalankan dari root dan file di dalam direktorinya hanya ada file foto-foto kucing.
+Terakhir, dilakukan looping untuk setiap file .jpeg yang ada di direktori tersebut, diberi penamaan baru secara terurut (untuk mengatasi nama-nama file yang hilang akibat delete). Looping dilakukan dengan asumsi command bash ini dijalankan dari root.
 ```sh
 i=1
 cd "$loc"
-for f in *.jpeg
+for f in Koleksi_*.jpeg
     do
     if [ $i -lt 10 ]
         then 
