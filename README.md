@@ -207,6 +207,8 @@ Hasilnya adalah sebagai berikut:
 ```
 Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah Central dengan total keuntungan 39706.4 
 ```
+
+Berikut keseluruhan isi hasi.txt :
 ```txt
 Transaksi terakhir dengan profit percentage terbesar yaitu 9952 dengan persentase 100 %
 
