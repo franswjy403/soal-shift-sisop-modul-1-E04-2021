@@ -354,10 +354,10 @@ Langkah selanjutnya adalah mentraverse semua file yang ada di direktori yang sam
 ```sh
 for f in *; do
     if [ -d "$f" ]; then
-        if [[ "$f" == *"$SUB"* ]] 
+        if [[ "$f" == "$SUB"_* ]] 
         then
             zip -r -P "$password" Koleksi.zip "$f"
-        elif [[ "$f" == *"$SUB2"* ]] 
+        elif [[ "$f" == "$SUB2"_* ]] 
         then   
             zip -r -P "$password" Koleksi.zip "$f"
         fi
