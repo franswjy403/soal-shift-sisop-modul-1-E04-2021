@@ -10,11 +10,10 @@
 2. Soal 2
 3. Soal 3
 
-##Soal 1
+## Soal 1
 Pada soal ini Ryujin diminta membuat **laporan daftar peringkat pesan error terbanyak** dan **laporan penggunaan user** pada aplikasi _ticky_
 
-### 1a
-#### Soal:
+### Soal 1a
 (a) Mengumpulkan informasi dari log aplikasi yang terdapat pada file syslog.log. Informasi yang diperlukan antara lain: jenis log (ERROR/INFO), pesan log, dan username pada setiap baris lognya. Karena Ryujin merasa kesulitan jika harus memeriksa satu per satu baris secara manual, dia menggunakan regex untuk mempermudah pekerjaannya. Bantulah Ryujin membuat regex tersebut.
 
 #### Jawab:
@@ -35,8 +34,7 @@ ticky: ERROR Tried to add information to closed ticket (mcintosh)
 </pre>
 Hasil ini dimasukkan ke variabel bernama `$allLogInfo`
 
-### 1b
-#### Soal:
+### Soal 1b
 (b) Kemudian, Ryujin harus menampilkan semua pesan error yang muncul beserta jumlah kemunculannya.
 
 #### Jawab:
@@ -54,8 +52,7 @@ Hasilnya kurang lebih seperti berikut.
 7 Ticket doesn&apos;t exist 
 </pre>
 
-### 1c
-#### Soal:
+### Soal 1c
 (c) Ryujin juga harus dapat menampilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya.
 
 #### Jawab:
@@ -74,8 +71,7 @@ enim.non
 ...,
 </pre>
 
-### 1d
-#### Soal:
+### Soal 1d
 (d) Semua informasi yang didapatkan pada poin b dituliskan ke dalam file error_message.csv dengan header Error,Count yang kemudian diikuti oleh 
 daftar pesan error dan jumlah kemunculannya diurutkan berdasarkan jumlah kemunculan pesan error dari yang terbanyak.
 
@@ -91,8 +87,7 @@ done >> error_message.csv
 ```
 Pertama header dikirim ke file error_message.csv dengan redirection `>`. Kemudian, tiap baris  di `$errorList` dijadikan input while loop dengan dimasukkan ke variabel `$cekerror`. Lalu, deskripsi error dan jumlah error dipisah dengan cut dan dimasukkan ke variabel `namaerror` dan `jumlah error`. Setelah itu, dua isi variabel tersebut ditambahkan ke file csv dengan redirection `>>`
 
-### 1e
-#### Soal:
+### Soal 1e
 (e) Semua informasi yang didapatkan pada poin c dituliskan ke dalam file user_statistic.csv dengan header Username,INFO,ERROR diurutkan berdasarkan username secara ascending.
 
 #### Jawab:
