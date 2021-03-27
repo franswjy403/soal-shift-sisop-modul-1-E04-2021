@@ -1,9 +1,9 @@
 # Soal Shift Sisop 2021 Modul 1
 
 ### Anggota:
-1. Frans Wijaya		(05111940000098)
-2. Jagad Wijaya P.	(05111940000132)
-3. Fidhia Ainun K.	(05111940000203)
+1. [Frans Wijaya](https://github.com/franswjy403)		(05111940000098)
+2. [Jagad Wijaya P.](https://github.com/Jagadwp)	(05111940000132)
+3. [Fidhia Ainun K.](https://github.com/fidhiaaka)	(05111940000203)
 
 ### List soal:
 1. Soal 1
