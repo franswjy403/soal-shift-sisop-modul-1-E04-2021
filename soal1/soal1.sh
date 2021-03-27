@@ -1,20 +1,18 @@
 #!bin/bash
 
 #1A 
-error="$(grep -E -o "ERROR" syslog.log)"
-info="$(grep -E -o "INFO" syslog.log)"
-errorCount="$(grep -o "ERROR" syslog.log | wc -l)"
-infoCount="$(grep -o "INFO" syslog.log | wc -l)"
+allLogInfo=`grep -o "ticky.*" syslog.log | cut -f 2-`
 
 #1B
-errorList=`grep -o 'ERROR.*' syslog.log | cut -d" " -f2- | cut -d "(" -f1 | sort -V | uniq -c | sort -nr`
+errorList=`echo "$allLogInfo" | grep -o "ERROR.*" | cut -d " " -f 2- | cut -d "(" -f 1 | sort -V | uniq -c | sort -nr`
+#echo "$errorList"
 
 #1C
-userList=`cut -d"(" -f2 < syslog.log | cut -d ")" -f1 | sort | uniq`
+userList=`echo "$allLogInfo" | cut -d "(" -f2 | cut -d ")" -f 1 | sort | uniq`
 
 #1D
 echo "Error,Count" > error_message.csv
-printf "$errorList" | while read cekerror
+echo "$errorList" | while read cekerror
 do
 	namaerror=`echo $cekerror | cut -d' ' -f2-`
 	jumlaherror=`echo $cekerror | cut -d' ' -f1`
@@ -23,7 +21,7 @@ done >> error_message.csv
 
 #1E
 echo "Username,Info,Error" > user_statistic.csv
-printf "$userList" | 
+echo "$userList" | 
 while read user
     do
         thisInfoSum=$(grep -E "INFO.*($user))" syslog.log | wc -l)
