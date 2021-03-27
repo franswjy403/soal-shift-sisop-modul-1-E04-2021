@@ -233,10 +233,10 @@ Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedi
 ```
 
 Berikut keseluruhan isi hasi.txt :
-```txt
+```txtu
 Transaksi terakhir dengan profit percentage terbesar yaitu 9952 dengan persentase 100 %
 
-Daftar nama customer di Albuquerque pada tahun 2017 antara lain:
+Daftar nama customer di Albuqerque pada tahun 2017 antara lain:
 Benjamin Farhat
 Michelle Lonsdale
 Susan Vittorini
@@ -246,3 +246,6 @@ Tipe segmen customer yang penjualannya paling sedikit adalah Home Office dengan 
 
 Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah Central dengan total keuntungan 39706.4 
 ```
+## Soal 3
+Secara keseluruhan soal ini meminta script-script yang bisa mendownload gambar, kemudian diberi nama, lalu dijadikan satu folder, dan terakhir di-*zip* berpassword.
+
