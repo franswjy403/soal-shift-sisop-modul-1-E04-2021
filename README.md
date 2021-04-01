@@ -347,8 +347,9 @@ Pertama, kami deklarasikan dulu beberapa variabel yang berguna untuk pencarian f
 SUB="Kelinci"
 SUB2="Kucing"
 password=$(date +%m%d%Y)
+cd /home/frans0416/Documents/sisopE/soal3
 ```
-Syntax di atas bertujuan agar nantinya, folder yang di zip hanyalah folder kelinci dan kucing.
+Syntax di atas bertujuan agar nantinya, folder yang di zip hanyalah folder kelinci dan kucing. Lalu perlu dilakukan cd ke lokasi penyimpanan folder-folder foto, karena nantinya, cron bekerja dari root.
 
 Langkah selanjutnya adalah mentraverse semua file yang ada di direktori yang sama (`for f in *;`). Jika file merupakan folder (`if [ -d "$f" ]`), maka akan dicek, apakah substring dari nama folder tersebut merupakan salah satu di antara kucing atau kelinci.
 ```sh
@@ -377,10 +378,10 @@ rm -rf "$f"
 ## Jawaban Soal 3e
 Soal 3e meminta agar semua folder koleksi foto di zip ketika jam kuliah. Adapun jam kuliahnya adalah setiap hari senin-jumat dari jam 07:00 sampai 18:00. Oleh karena itu, perintah cron yang pertama adalah:
 ```tab
-* 7-18 * * 1-5 bash /home/frans0416/Documents/sisopE/soal3/soal3d.sh
+* 7 * * 1-5 bash /home/frans0416/Documents/sisopE/soal3/soal3d.sh
 ```
 Kemudian, permintaan selanjutnya adalah, di luar jam itu, unzip semua file zip dan hapus file zip. Untuk itu, perintah cron yang perlu dilakukan adalah `unzip -P password file`. Password untuk mengunzip direktorinya adalah tanggal di hari itu sendiri. Karena, tiap harinya pasti akan ada proses unzip dan zip. Jadi, pastinya file koleksi foto akan terzip setiap paginya dengan password berupa tanggal di hari itu. Oleh karena itu, unzipnya pun cukup memakain tanggal di hari itu.
 ```
-* 18-23 * * 1-5 unzip -P 'date "+\%m\%d\%Y"' /home/frans0416/Documents/sisopE/soal3/Koleksi.zip && rm /home/frans0416/Documents/sisopE/soal3/Koleksi.zip
+* 18-23 * * 1-5 unzip -P $(date '+%m%d%Y') /home/frans0416/Documents/sisopE/soal3/Koleksi.zip && rm /home/frans0416/Documents/sisopE/soal3/Koleksi.zip
 ```
 Lalu, syntax `rm filepath` berguna untuk menghapus zip yang telah diunzip tadi.
