@@ -17,18 +17,17 @@ Pada soal ini Ryujin diminta membuat **laporan daftar peringkat pesan error terb
 (a) Mengumpulkan informasi dari log aplikasi yang terdapat pada file syslog.log. Informasi yang diperlukan antara lain: jenis log (ERROR/INFO), pesan log, dan username pada setiap baris lognya. Karena Ryujin merasa kesulitan jika harus memeriksa satu per satu baris secara manual, dia menggunakan regex untuk mempermudah pekerjaannya. Bantulah Ryujin membuat regex tersebut.
 #### Jawab:
 ```
-allLogInfo=`grep -o "ticky.*" syslog.log | cut -f 2-`
+allLogInfo=`grep -o "ticky:.*" syslog.log | cut -d " " -f 2-`
 ```
 Untuk mengumpulkan semua informasi log , digunakan command `grep` dengan kata kunci "ticky.*" pada file syslog.log. 
 Dengan option `-o` maka yang diprint/dihasilkan hanyalah bagian yang sesuai dengan kata kunci. Hasilnya kurang lebih seperti berikut.
 <pre>
-ticky: INFO Created ticket [#4217] (mdouglas)
-ticky: INFO Closed ticket [#1754] (noel)
-ticky: ERROR The ticket was modified while updating (breee)
-ticky: ERROR Permission denied while closing ticket (ac)
-ticky: INFO Commented on ticket [#4709] (blossom)
-ticky: INFO Commented on ticket [#6518] (rr.robinson)
-ticky: ERROR Tried to add information to closed ticket (mcintosh)
+INFO Created ticket [#4217] (mdouglas)
+INFO Closed ticket [#1754] (noel)
+ERROR The ticket was modified while updating (breee)
+ERROR Permission denied while closing ticket (ac)
+INFO Commented on ticket [#4709] (blossom)
+INFO Commented on ticket [#6518] (rr.robinson
 ....
 </pre>
 Hasil ini dimasukkan ke variabel bernama `$allLogInfo`
@@ -54,7 +53,7 @@ Hasilnya kurang lebih seperti berikut.
 (c) Ryujin juga harus dapat menampilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya.
 #### Jawab:
 ```
-userList=`echo "$allLogInfo" | cut -d "(" -f2 | cut -d ")" -f 1 | sort | uniq`
+userList=`echo "$allLogInfo" | cut -d "(" -f 2 | cut -d ")" -f 1 | sort | uniq`
 ```
 Untuk mengumpulkan nama user, hasil dari `$allLogInfo` dijadikan input ke command `cut`. Setelah mendapat daftar user, hasilnya di urutkan dengan command `sort`, lalu hasil yang sudah urut secara ascending di tampilkan secara unique dengan command `uniq`. Hasilnya seperti berikut.
 <pre>
@@ -65,7 +64,7 @@ bpacheco
 breee
 britanni
 enim.non
-...,
+...
 </pre>
 
 #### Soal 1d
@@ -76,8 +75,8 @@ daftar pesan error dan jumlah kemunculannya diurutkan berdasarkan jumlah kemuncu
 echo "Error,Count" > error_message.csv
 echo "$errorList" | while read cekerror
 do
-	namaerror=`echo $cekerror | cut -d' ' -f2-`
-	jumlaherror=`echo $cekerror | cut -d' ' -f1`
+	namaerror=`echo $cekerror | cut -d ' ' -f 2-`
+	jumlaherror=`echo $cekerror | cut -d ' ' -f 1`
 	echo "$namaerror,$jumlaherror" 
 done >> error_message.csv
 ```
