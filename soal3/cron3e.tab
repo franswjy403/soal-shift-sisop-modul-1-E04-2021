@@ -1,2 +1,2 @@
-* 7-18 * * 1-5 bash /home/frans0416/Documents/sisopE/soal3/soal3d.sh
-* 18-23 * * 1-5 unzip -P 'date "+\%m\%d\%Y"' /home/frans0416/Documents/sisopE/soal3/Koleksi.zip && rm /home/frans0416/Documents/sisopE/soal3/Koleksi.zip
+* 7 * * 1-5 bash /home/frans0416/Documents/sisopE/soal3/soal3d.sh
+* 18-23 * * 1-5 unzip -P $(date '+%m%d%Y') /home/frans0416/Documents/sisopE/soal3/Koleksi.zip && rm /home/frans0416/Documents/sisopE/soal3/Koleksi.zip
