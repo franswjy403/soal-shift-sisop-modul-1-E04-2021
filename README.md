@@ -350,6 +350,8 @@ cd /home/frans0416/Documents/sisopE/soal3
 ```
 Syntax di atas bertujuan agar nantinya, folder yang di zip hanyalah folder kelinci dan kucing. Lalu perlu dilakukan cd ke lokasi penyimpanan folder-folder foto, karena nantinya, cron bekerja dari root.
 
+Terdapat pula syntax chang directory. Pada percobaan sebelumnya, tanpa syntax cd ke lokasi penyimpanan folder foto, folder-folder foto yang ada tidak akan terzip melalui cron jobs. Hal ini dikarenakan cron jobs bekerja dari root, sehingga perlu ada syntax cd ke lokasi foto-foto agar perintah berjalan sesuai keinginan.
+
 Langkah selanjutnya adalah mentraverse semua file yang ada di direktori yang sama (`for f in *;`). Jika file merupakan folder (`if [ -d "$f" ]`), maka akan dicek, apakah substring dari nama folder tersebut merupakan salah satu di antara kucing atau kelinci.
 ```sh
 for f in *; do
@@ -383,4 +385,6 @@ Kemudian, permintaan selanjutnya adalah, di luar jam itu, unzip semua file zip d
 ```
 * 18-23 * * 1-5 unzip -P $(date '+%m%d%Y') /home/frans0416/Documents/sisopE/soal3/Koleksi.zip && rm /home/frans0416/Documents/sisopE/soal3/Koleksi.zip
 ```
+Terdapat deklarasi `$(date '+%m%d%Y')` yang berfungsi untuk merubah inputan tanggal menjadi variabel string agar bisa dijadikan sebagai inputan password. Pada percobaan sebelumnya, penginputan nilai password tidak bisa dari nilai date langsung, tetapi perlu diubah dahulu menjadi variabel string.
+
 Lalu, syntax `rm filepath` berguna untuk menghapus zip yang telah diunzip tadi.
