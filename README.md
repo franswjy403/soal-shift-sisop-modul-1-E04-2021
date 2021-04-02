@@ -288,6 +288,9 @@ let i=$i+1
 done
 ```
 Syntax `for f in Koleksi_*.jpeg` berguna untuk mencari file-file dengan nama Koleksi_ dan bertipe jpeg. Syntax `mv -- old_file new_fie` kami gunakan untuk memindah file yang ada ke tempat yang sama, tetapi dengan format nama berbeda.
+
+Hasilnya :
+![picture](gambar/soal3a.png)
 ## Jawaban Soal 3b
 ### soal3b.sh
 Untuk soal 3b, tidak jauh berbeda dengan soal 3a. Hanya saja, file-file yang telah di download ini harus disimpan ke dalam sebuah folder dengan format nama DD-MM-YY. Berikut syntax pembuatan foldernya:
@@ -299,6 +302,8 @@ Dengan adanya folder baru ini, hanya akan mempengaruhi lokasi penyimpanannya saj
 ```sh
 wget -a "$root"/"$loc"/Foto.log "https://loremflickr.com/320/240/kitten" -O "$root"/"$loc"/Koleksi_0"$i".jpeg
 ```
+Hasilnya :
+![picture](gambar/soal3b.png)
 ### cron3b.tab
 Pada soal, diminta menjalankan script soal3b.sh, setiap pukul 20:00 (`00 20`) setiap tujuh hari dimulai dari tanggal 1 (`1/7`) dan setiap 4 hari dimulai dari tanggal 2 (`2/4`).
 ```tab
@@ -337,6 +342,9 @@ for ((i=1; i<=23; i=i+1))
 done
 ```
 Selebihnya, untuk penghapusan file duplikat, penamaan file, dan penyimpanan file hampir sama seperti soal 3b, hanya berbeda path.
+
+Hasil:
+![picture](gambar/soal3c.png)
 ## Jawaban Soal 3d
 Soal 3d meminta agar semua folder, baik folder kucing maupun kelinci, di zip ke dalam sebuah file bernama Koleksi.zip dan diberi password berupa tanggal dengan format MMDDYYYY.
 
@@ -376,6 +384,9 @@ Lalu, agar folder yang telah di zip tadi terhapus (karena ketika melakukan zip, 
 ```sh
 rm -rf "$f"
 ```
+Hasilnya :
+![picture](gambar/soal3d.png)
+![picture](gambar/soal3d2.png)
 ## Jawaban Soal 3e
 Soal 3e meminta agar semua folder koleksi foto di zip ketika jam kuliah. Adapun jam kuliahnya adalah setiap hari senin-jumat dari jam 07:00 sampai 18:00. Oleh karena itu, perintah cron yang pertama adalah:
 ```tab
